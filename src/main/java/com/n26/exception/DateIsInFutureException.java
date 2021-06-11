@@ -4,13 +4,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-public class DateIsFutureException extends Exception {
+public class DateIsInFutureException extends Exception {
 
-    public DateIsFutureException(String message) {
+    public DateIsInFutureException(String message) {
         super(message);
     }
 
-    public DateIsFutureException(String message, Throwable cause) {
+    public DateIsInFutureException(String message, Throwable cause) {
         super(message, cause);
     }
 }

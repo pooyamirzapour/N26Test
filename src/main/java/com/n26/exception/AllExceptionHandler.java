@@ -23,8 +23,13 @@ public class AllExceptionHandler {
         return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(DateIsFutureException.class)
-    public ResponseEntity<?> dateIsFutureException() {
+    @ExceptionHandler(DateIsInFutureException.class)
+    public ResponseEntity<?> dateIsInFutureException() {
+        return new ResponseEntity<>("", HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(DateFormatParseException.class)
+    public ResponseEntity<?> dateFormatParseException() {
         return new ResponseEntity<>("", HttpStatus.UNPROCESSABLE_ENTITY);
     }
 

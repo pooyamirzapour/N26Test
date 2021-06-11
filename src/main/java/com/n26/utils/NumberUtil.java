@@ -12,7 +12,7 @@ public class NumberUtil {
         if ( amount==null|| amount.isEmpty())
             throw new AmountIsEmptyException("The input amount is empty");
         try {
-            return new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP);
+            return new BigDecimal(amount);
         }
         catch (Exception ex)
         {
