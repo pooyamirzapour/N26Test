@@ -11,7 +11,7 @@ public class NumberUtil {
 
     private final static Logger log = LoggerFactory.getLogger(NumberUtil.class);
 
-    public static BigDecimal getBigDecimal(String amount) throws DecimalFormatParseException, AmountIsEmptyException {
+        public static BigDecimal getBigDecimal(String amount) throws DecimalFormatParseException, AmountIsEmptyException {
         if (amount == null || amount.isEmpty()) {
             String msg = "The input amount is empty";
             log.error(msg);

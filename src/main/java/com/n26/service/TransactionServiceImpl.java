@@ -34,7 +34,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public synchronized Statistics get() {
+    public Statistics get() {
         Instant instant = Instant.now();
         DoubleSummaryStatistics summary = concurrentHashMap.entrySet().stream()
                 .filter(p -> p.getKey() >= instant.toEpochMilli() - 60000)
