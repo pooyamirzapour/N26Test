@@ -22,14 +22,12 @@ public class TransactionController {
     @PostMapping("/transactions")
     public ResponseEntity<String> save(@Valid @RequestBody TransactionDTO transactionDTO) throws Exception {
         return transactionService.save(transactionDTO);
-       // return new ResponseEntity<>("",save.getStatusCode());
-
     }
 
     @DeleteMapping("/transactions")
-    public ResponseEntity<String> remove()  {
+    public ResponseEntity<Void> remove()  {
         transactionService.remove();
-        return ResponseEntity.ok("ok");
+        return new ResponseEntity<>( HttpStatus.NO_CONTENT);
     }
 
 
