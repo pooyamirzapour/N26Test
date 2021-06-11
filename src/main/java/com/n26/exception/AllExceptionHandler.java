@@ -13,13 +13,23 @@ public class AllExceptionHandler {
         return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(DateFormatParseException.class)
-    public ResponseEntity<?> dateFormatParseException() {
-        return new ResponseEntity<>("", HttpStatus.UNPROCESSABLE_ENTITY);
-    }
-
     @ExceptionHandler(DateIsEmptyException.class)
     public ResponseEntity<?> dateIsEmptyException() {
         return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DecimalFormatParseException.class)
+    public ResponseEntity<?> decimalFormatParseException() {
+        return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DateIsFutureException.class)
+    public ResponseEntity<?> dateIsFutureException() {
+        return new ResponseEntity<>("", HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(OutDatedTransactionException.class)
+    public ResponseEntity<?> outDatedTransactionException() {
+        return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
     }
 }

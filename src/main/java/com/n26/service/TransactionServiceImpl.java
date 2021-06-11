@@ -21,30 +21,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public synchronized ResponseEntity save(TransactionDTO transactionDTO) throws AmountIsEmptyException, DecimalFormatParseException, OutDatedTransactionException, DateFormatParseException, DateIsEmptyException, DateIsFutureException {
-
-        long time;
-        BigDecimal amount;
-        if (transactionDTO == null)
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-//        try {
-        amount = NumberUtil.getBigDecimal(transactionDTO.getAmount());
-        time = DateUtil.dateToMilli(transactionDTO.getTime());
-//        } catch (OutDatedTransactionException ex) {
-//            return new ResponseEntity(HttpStatus.NO_CONTENT);
-//        } catch (DateFormatParseException | DateIsFutureException ex) {
-//            return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
-//        } catch (DecimalFormatParseException ex) {
-//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-//        } catch (AmountIsEmptyException ex) {
-//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-//        } catch (DateIsEmptyException ex) {
-//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-//        }
+        BigDecimal amount = NumberUtil.getBigDecimal(transactionDTO.getAmount());
+        long time = DateUtil.dateToMilli(transactionDTO.getTime());
         concurrentHashMap.put(time, amount);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
-
 
 
     @Override
