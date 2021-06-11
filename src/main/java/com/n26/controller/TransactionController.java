@@ -20,8 +20,10 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @PostMapping("/transactions")
-    public ResponseEntity<Void> save(@Valid @RequestBody TransactionDTO transactionDTO) throws Exception {
-       return transactionService.save(transactionDTO);
+    public ResponseEntity<String> save(@Valid @RequestBody TransactionDTO transactionDTO) throws Exception {
+        return transactionService.save(transactionDTO);
+       // return new ResponseEntity<>("",save.getStatusCode());
+
     }
 
     @DeleteMapping("/transactions")

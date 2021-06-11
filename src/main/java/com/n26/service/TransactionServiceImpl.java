@@ -1,9 +1,6 @@
 package com.n26.service;
 
-import com.n26.exception.DateFormatParseException;
-import com.n26.exception.DateIsFutureException;
-import com.n26.exception.DecimalFormatParseException;
-import com.n26.exception.OutDatedTransactionException;
+import com.n26.exception.*;
 import com.n26.model.add.TransactionDTO;
 import com.n26.model.get.Statistics;
 import com.n26.utils.DateUtil;
@@ -23,28 +20,31 @@ public class TransactionServiceImpl implements TransactionService {
 
 
     @Override
-    public synchronized ResponseEntity save(TransactionDTO transactionDTO) throws DateFormatParseException, DecimalFormatParseException {
+    public synchronized ResponseEntity save(TransactionDTO transactionDTO) throws AmountIsEmptyException, DecimalFormatParseException, OutDatedTransactionException, DateFormatParseException, DateIsEmptyException, DateIsFutureException {
+
         long time;
         BigDecimal amount;
-        if (transactionDTO == null || transactionDTO.getAmount().isEmpty() || transactionDTO.getTime().isEmpty())
+        if (transactionDTO == null)
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        try {
-            time = DateUtil.dateToMilli(transactionDTO.getTime());
-            amount = NumberUtil.getBigDecimal(transactionDTO.getAmount());
-        } catch (OutDatedTransactionException ex) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        } catch (DateFormatParseException | DateIsFutureException ex) {
-            return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
-        }
-        return makeResponse(time, amount);
-    }
-
-
-    private ResponseEntity makeResponse(long time, BigDecimal amount) {
+//        try {
+        amount = NumberUtil.getBigDecimal(transactionDTO.getAmount());
+        time = DateUtil.dateToMilli(transactionDTO.getTime());
+//        } catch (OutDatedTransactionException ex) {
+//            return new ResponseEntity(HttpStatus.NO_CONTENT);
+//        } catch (DateFormatParseException | DateIsFutureException ex) {
+//            return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
+//        } catch (DecimalFormatParseException ex) {
+//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+//        } catch (AmountIsEmptyException ex) {
+//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+//        } catch (DateIsEmptyException ex) {
+//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+//        }
         concurrentHashMap.put(time, amount);
         return new ResponseEntity<>(HttpStatus.CREATED);
-
     }
+
+
 
 
     @Override

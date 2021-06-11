@@ -4,13 +4,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-public class DateFormatParseException extends Exception{
-    public DateFormatParseException(String message) {
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+public class AmountIsEmptyException extends Exception{
+
+    public AmountIsEmptyException(String message) {
         super(message);
     }
 
-    public DateFormatParseException(String message, Throwable cause) {
+    public AmountIsEmptyException(String message, Throwable cause) {
         super(message, cause);
     }
 }
