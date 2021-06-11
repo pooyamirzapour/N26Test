@@ -32,7 +32,7 @@ public class TransactionController {
 
     @GetMapping("/statistics")
     public ResponseEntity<Statistics> get() throws Exception {
-        Statistics Statistics = transactionService.get();
+        Statistics Statistics = transactionService.getStatistics();
         return new ResponseEntity<>(Statistics, HttpStatus.OK);
     }
 

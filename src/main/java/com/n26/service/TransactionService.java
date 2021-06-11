@@ -13,5 +13,5 @@ public interface TransactionService {
 
     void remove();
 
-    Statistics get();
+    Statistics getStatistics();
 }
