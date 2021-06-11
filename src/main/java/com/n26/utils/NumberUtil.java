@@ -20,7 +20,7 @@ public class NumberUtil {
         try {
             return new BigDecimal(amount);
         } catch (Exception ex) {
-            String msg = String.format("The input timestamp is invalid: %s", amount);
+            String msg = String.format("The input amount is invalid: %s", amount);
             log.error(msg);
             throw new DecimalFormatParseException(msg, ex.getCause());
         }
