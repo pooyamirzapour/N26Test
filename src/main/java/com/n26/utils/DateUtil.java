@@ -13,7 +13,6 @@ public class DateUtil {
 
     private final static Logger log = LoggerFactory.getLogger(DateUtil.class);
 
-
     public static long dateToMilli(String strDate) throws DateFormatParseException, DateIsInFutureException, OutDatedTransactionException, DateIsEmptyException {
         if (strDate == null || strDate.isEmpty()) {
             String msg = "The input timestamp is empty";
@@ -26,7 +25,7 @@ public class DateUtil {
         } catch (Exception ex) {
             String msg = String.format("The input timestamp is invalid: %s", strDate);
             log.error(msg);
-            throw new DateFormatParseException(msg);
+            throw new DateFormatParseException(msg,ex);
         }
         if (instant.toEpochMilli() > Instant.now().toEpochMilli()) {
             String msg = String.format("The transaction is for future: %s", strDate);

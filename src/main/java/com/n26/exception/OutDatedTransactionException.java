@@ -11,8 +11,4 @@ public class OutDatedTransactionException extends Exception{
         super(message);
     }
 
-    public OutDatedTransactionException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
 }

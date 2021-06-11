@@ -10,7 +10,4 @@ public class DateIsEmptyException extends Exception {
         super(message);
     }
 
-    public DateIsEmptyException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

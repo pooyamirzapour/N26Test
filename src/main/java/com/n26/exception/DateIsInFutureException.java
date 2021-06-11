@@ -10,7 +10,4 @@ public class DateIsInFutureException extends Exception {
         super(message);
     }
 
-    public DateIsInFutureException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

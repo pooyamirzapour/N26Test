@@ -27,9 +27,8 @@ public class TransactionController {
     @DeleteMapping("/transactions")
     public ResponseEntity<Void> remove()  {
         transactionService.remove();
-        return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 
     @GetMapping("/statistics")
     public ResponseEntity<Statistics> get() throws Exception {

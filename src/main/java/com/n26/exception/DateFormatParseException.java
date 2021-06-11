@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
 public class DateFormatParseException extends Exception{
-    public DateFormatParseException(String message) {
-        super(message);
-    }
 
     public DateFormatParseException(String message, Throwable cause) {
         super(message, cause);
