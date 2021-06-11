@@ -13,5 +13,11 @@ public class TransactionDTO {
     @JsonProperty("amount")
     private String amount;
 
+    public TransactionDTO(String time, String amount) {
+        this.time = time;
+        this.amount = amount;
+    }
 
+    public TransactionDTO() {
+    }
 }
