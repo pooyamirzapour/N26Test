@@ -1,10 +1,13 @@
 package com.n26.unit;
 
 import com.n26.exception.*;
+import com.n26.model.add.Transaction;
 import com.n26.model.add.TransactionDTO;
+import com.n26.model.get.Statistics;
 import com.n26.service.TransactionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -16,13 +19,17 @@ import java.time.Instant;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class TransactionServiceTest {
+    @Mock
+    private TransactionService mockTransactionService;
 
     @Autowired
     private TransactionService transactionService;
+
 
     @Test
     public void testSaveHappy() throws DateIsInFutureException, AmountIsEmptyException, OutDatedTransactionException, DecimalFormatParseException, ParseException, DateFormatParseException, DateIsEmptyException {
@@ -69,4 +76,32 @@ public class TransactionServiceTest {
         TransactionDTO transactionDTO = new TransactionDTO("2020-06-11T12:04:15.312Z", "1234.1234");
         assertThrows(OutDatedTransactionException.class, () -> transactionService.save(transactionDTO));
     }
+
+    @Test
+    public void testRemoveTransaction() {
+        doNothing().when(mockTransactionService).remove();
+        mockTransactionService.remove();
+        verify(mockTransactionService, times(1)).remove();
+    }
+
+    @Test
+    public void testGetTransaction() throws DateIsInFutureException, AmountIsEmptyException, OutDatedTransactionException, DecimalFormatParseException, ParseException, DateFormatParseException, DateIsEmptyException {
+        Instant instant = Instant.now();
+        TransactionDTO transactionDTO1 = new TransactionDTO(instant.toString(), "4");
+        Instant instant1 = instant.plusMillis(10);
+        TransactionDTO transactionDTO2 = new TransactionDTO(instant1.toString(), "6");
+        transactionService.save(transactionDTO1);
+        transactionService.save(transactionDTO2);
+        Statistics statistics = transactionService.getStatistics();
+
+        assertEquals(statistics.getCount(), 2);
+        assertEquals( Double.valueOf(6.0).doubleValue(),statistics.getMax(),0);
+        assertEquals( Double.valueOf(4).doubleValue(),statistics.getMin(),0);
+        assertEquals( Double.valueOf(10).doubleValue(),statistics.getSum(),0);
+        assertEquals( Double.valueOf(5).doubleValue(),statistics.getAvg(),0);
+
+    }
+
+
+
 }
