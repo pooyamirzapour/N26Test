@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.n26.integeration.ControllerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.265 s <<< FAILURE! - in com.n26.integeration.ControllerTest
+saveTest(com.n26.integeration.ControllerTest)  Time elapsed: 0.201 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.n26.integeration.ControllerTest.saveTest(ControllerTest.java:27)
+
