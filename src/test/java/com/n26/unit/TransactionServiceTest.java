@@ -85,9 +85,11 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void testGetTransaction() throws DateIsInFutureException, AmountIsEmptyException, OutDatedTransactionException, DecimalFormatParseException, ParseException, DateFormatParseException, DateIsEmptyException {
+    public void testGetTransaction() throws DateIsInFutureException, AmountIsEmptyException, OutDatedTransactionException, DecimalFormatParseException, ParseException, DateFormatParseException, DateIsEmptyException, InterruptedException {
+        transactionService.remove();
         Instant instant = Instant.now();
         TransactionDTO transactionDTO1 = new TransactionDTO(instant.toString(), "4");
+        Thread.sleep(100);
         Instant instant1 = instant.plusMillis(10);
         TransactionDTO transactionDTO2 = new TransactionDTO(instant1.toString(), "6");
         transactionService.save(transactionDTO1);
