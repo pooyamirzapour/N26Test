@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NO_CONTENT)
-@ResponseBody
 public class OutDatedTransactionException extends Exception{
     public OutDatedTransactionException(String message) {
         super(message);
